@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat Room</title>
+    <style>
+      #title {
+        font-size: 70px;
+        text-align: center;
+      }
+    </style>
+	<script>alert("\\ㄗㄋ/")</script>
+  </head>
+  <body>
+    <div id="title">各種電資</div>
+	<div id="title" style="font-size:25px;">ㄗㄋ大法好</br>陽菜我婆</br>喵～喵～喵～</div>
+    <form action="/" method="post">
+      <input placeholder="Name" name="name">
+      <input placeholder="Post Content" name="post">
+      <input type="submit" value="Submit">
+    </form>
+
+    <div>
+      {% for post in posts %}
+      {% if post[1] != "" and post[2] != "" %}
+      <div>{{ post[1] + " : " + post[2] }}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </body>
+</html>
