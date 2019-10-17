@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from models import create_post, get_posts
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +13,7 @@ def index():
     if request.method == 'POST':
         name = request.form.get('name')
         post = request.form.get('post')
-        create_post(name, post)
+        create_post(time.ctime(time.time()), name, post)
 
     posts = get_posts()
 
@@ -20,4 +21,4 @@ def index():
 
 
 if __name__ == "__main__":
-	app.run(debug=True, host = "140.131.149.51", port="80")
+	app.run(debug=True, host = "140.131.149.50", port="8080")
