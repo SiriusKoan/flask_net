@@ -1,0 +1,4 @@
+database.db
+database.db_old
+__pycache__/*
+myenv/*
