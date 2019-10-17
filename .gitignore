@@ -2,3 +2,4 @@ database.db
 database.db_old
 __pycache__/*
 myenv/*
+templates/index.html

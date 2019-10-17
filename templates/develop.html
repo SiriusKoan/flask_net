@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat Room</title>
+    <style>
+      #title {
+        font-size: 70px;
+        text-align: center;
+      }
+    </style>
+	<!--
+	<script>alert("\\子ㄋ/")</script>
+	-->
+  </head>
+  <body>
+    <div id="title">title</div>
+    <form action="/" method="post">
+      <input placeholder="Name" name="name">
+      <input placeholder="Post Content" name="post">
+      <input type="submit" value="Submit">
+    </form>
+
+    <div>
+      {% for post in posts %}
+      	{% if post[3] != "" and post[3] != "" %}
+			{% if post[2] == "root" %}
+				<div style="color: red;">{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
+			{% else %}
+       			<div>{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
+			{% endif %}
+      	{% endif %}
+      {% endfor %}
+    </div>
+  </body>
+</html>
