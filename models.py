@@ -1,6 +1,7 @@
 import sqlite3 as sql
 from os import path
 import encrypt
+from flask import request
 
 ROOT = path.dirname(path.relpath((__file__)))
 
@@ -27,13 +28,19 @@ def authorize(username, passwd):
     for user in data:
         if username in user:
             p = user[2]
+      
     try:
         if encrypt.sha(passwd) == p:
+            cur.execute("update users set login_ip = '%s' where username = '%s'" %(request.remote_addr, username))
+            con.commit()
+            con.close()
             return "login successfully!"
         else:
             return "login failed..."
     except:
         return "There's not this user..."
+    
+
 
 
 def register(username, passwd):

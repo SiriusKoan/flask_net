@@ -3,5 +3,5 @@ drop table if exists users;
         id integer primary key autoincrement,
         username text not null,
         passwd text not null,
-        login_ip text
+        login_ip binary
 );

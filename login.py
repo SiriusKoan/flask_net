@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from models import *
 import time
@@ -15,6 +15,7 @@ def index():
             passwd = request.form.get('passwd')
             status = authorize(username, passwd)
             return render_template('login.html', status=status)
+            
 
 
 if __name__ == "__main__":
