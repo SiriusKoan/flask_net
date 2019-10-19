@@ -1,5 +1,5 @@
 database.db
-database.db_old
+database_user.db
 __pycache__/*
 myenv/*
 templates/index.html
