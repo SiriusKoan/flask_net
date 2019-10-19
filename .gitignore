@@ -2,4 +2,3 @@ database_post.db
 database_user.db
 __pycache__/*
 myenv/*
-templates/index.html
