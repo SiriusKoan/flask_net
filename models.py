@@ -5,8 +5,9 @@ from flask import request
 
 ROOT = path.dirname(path.relpath((__file__)))
 
+# app.py
 def create_post(time, name, content):
-    con = sql.connect(path.join(ROOT, 'database.db'))
+    con = sql.connect(path.join(ROOT, 'database_post.db'))
     cur = con.cursor()
     cur.execute('insert into posts (time, name, content) values(?, ?, ?)', (time, name, content))
     con.commit()
@@ -19,7 +20,17 @@ def get_posts():
     posts = cur.fetchall()
     return posts
 
+def who_login(remote_ip):
+    con = sql.connect(path.join(ROOT, "database_user.db"))
+    cur = con.cursor()
+    cur.execute('select login_ip from users')
+    ips = cur.fetchall()
+    for ip in ips:
+        if ip == remote_ip:
+            return ip
+    return "haven't login"
 
+# login.py
 def authorize(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
     cur = con.cursor()
@@ -42,7 +53,7 @@ def authorize(username, passwd):
     
 
 
-
+# register.py
 def register(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
     cur = con.cursor()
