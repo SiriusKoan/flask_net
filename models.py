@@ -26,10 +26,10 @@ def who_login(remote_ip):
     cur.execute('select login_ip from users')
     ips = cur.fetchall()
     for ip in ips:
-        if ip == remote_ip:
+        if ip[0] == remote_ip:
             cur.execute('select username from users where login_ip = "%s"' %ip)
             who = cur.fetchall()
-            #return who[0]
+            return who[0]
     return "haven't login"
 
 

@@ -18,9 +18,8 @@ def index():
     posts = get_posts()
 
     who = who_login(request.remote_addr)
-    return who
 
-    return render_template('index.html', posts = posts)
+    return render_template('index.html', posts = posts, who = who)
 
 
 if __name__ == "__main__":
