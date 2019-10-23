@@ -27,8 +27,11 @@ def who_login(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip == remote_ip:
-            return ip
+            cur.execute('select username from users where login_ip = "%s"' %ip)
+            who = cur.fetchall()
+            #return who[0]
     return "haven't login"
+
 
 # login.py
 def authorize(username, passwd):
