@@ -5,7 +5,7 @@ from flask import request
 
 ROOT = path.dirname(path.relpath((__file__)))
 
-# app.py
+# main
 def create_post(time, name, content):
     con = sql.connect(path.join(ROOT, 'database_post.db'))
     cur = con.cursor()
@@ -29,11 +29,31 @@ def who_login(remote_ip):
         if ip[0] == remote_ip:
             cur.execute('select username from users where login_ip = "%s"' %ip)
             who = cur.fetchall()
+            con.commit()
+            con.close()
             return who[0]
+    con.commit()
+    con.close()
     return "haven't login"
 
+def logout(remote_ip):
+    con = sql.connect(path.join(ROOT, "database_user.db"))
+    cur = con.cursor()
+    cur.execute('select login_ip from users')
+    ips = cur.fetchall()
+    for ip in ips:
+        if ip[0] == remote_ip:
+            cur.execute('update users set login_ip = "" where login_ip = "%s"' %ip)
+            con.commit()
+            con.close()
+            return 'ok'
+    con.commit()
+    con.close()
+    return 'fail'
 
-# login.py
+
+
+# login
 def authorize(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
     cur = con.cursor()
@@ -56,7 +76,7 @@ def authorize(username, passwd):
     
 
 
-# register.py
+# register
 def register(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
     cur = con.cursor()
