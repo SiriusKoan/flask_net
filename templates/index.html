@@ -23,7 +23,7 @@
     <div style="width:45vw; right:3vw; position:absolute;" id="posts">
       <form action="/" method="post">
         <input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
-        <input placeholder="Post Content" name="post">
+        <textarea placeholder="Post Content" name="post"></textarea>
         {% if who != "haven't login" %}
         <input type="submit" value="Submit">
         {% else %}
