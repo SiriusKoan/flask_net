@@ -115,3 +115,6 @@ def make_table(li):
             out += str(li[i][j]) + " "
         out += "?"
     return out
+
+def announce(content):
+    pass

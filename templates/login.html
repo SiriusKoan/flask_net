@@ -3,9 +3,11 @@
         <title>Login</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>login</h1>
+        <h1 id="title">login</h1>
+        <a href="http://127.0.0.1:8080" class="backhome">Home Page</a>
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="passwd" placeholder="password">

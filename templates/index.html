@@ -4,29 +4,36 @@
     <meta charset="utf-8">
     <title>Chat Room</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <div id="title">title</div>
-    <a href="http://127.0.0.1:8080/register" target="_blank"><button>register</button></a>
-    {% if who == "haven't login" %}
-    <a href="http://127.0.0.1:8080/login"><button>login</button></a>
-    {% else %}
-    <a href="http://127.0.0.1:8080/logout"><button>logout</button></a>
-    {% endif %}
-
-    <form action="/" method="post">
-      <input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
-      <input placeholder="Post Content" name="post">
-      {% if who != "haven't login" %}
-      <input type="submit" value="Submit">
+    <div style="width:45vw; left:3vw; position:absolute;" id="operation and announce">
+      <a href="http://127.0.0.1:8080/register" target="_blank"><button>register</button></a>
+      {% if who == "haven't login" %}
+      <a href="http://127.0.0.1:8080/login"><button>login</button></a>
       {% else %}
-      <script>
-        alert("You haven\'t login!!!");
-      </script>
+      <a href="http://127.0.0.1:8080/logout"><button style="background-color: rgb(238, 62, 49);">logout</button></a>
       {% endif %}
-    </form>
+      now login : {{ who }}
+      <hr>
+      <h2>Announce</h2>
+    </div>
 
-    <div>
+    <div style="width:45vw; right:3vw; position:absolute;" id="posts">
+      <form action="/" method="post">
+        <input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
+        <input placeholder="Post Content" name="post">
+        {% if who != "haven't login" %}
+        <input type="submit" value="Submit">
+        {% else %}
+        <script>
+          alert("You haven\'t login!!!");
+        </script>
+        {% endif %}
+      </form>
+      <hr>
+  
       {% for post in posts %}
       	{% if post[3] != "" and post[3] != "" %}
 			{% if post[2] == "root" %}
@@ -36,7 +43,6 @@
 			{% endif %}
       	{% endif %}
       {% endfor %}
-      
     </div>
   </body>
 </html>
