@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>admin</title>
+        <meta charset="uft-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
+    </head>
+    <body>
+        {% if whether_root == True %}
+            <h1 style="font-size: 50px;">Management</h1>
+            <h1>Users</h1>
+            <script>
+                var s = "{{ users }}".split("?");
+                for (var i = 0; i < s.length - 1; i++) {
+                    document.write(s[i] + "<br>");
+                }
+            </script>
+            <hr>
+            <h1>Posts</h1>
+            <script>
+                var s = "{{ posts }}".split("?");
+                for (var i = 0; i < s.length; i++) {
+                    document.write(s[i] + "<br>");
+                }
+            </script>
+        {% else %}
+            <h1 style="font-size: 70px; color: red;">Forbidden</h1>
+            <h2>You are not root!</h2>
+        {% endif %}
+    </body>
+</html>

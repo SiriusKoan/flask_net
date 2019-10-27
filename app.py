@@ -58,6 +58,15 @@ def logout_main():
     logout(request.remote_addr)
     return redirect("http://127.0.0.1:8080")
 
+# admin
+@app.route("/admin")
+def admin_manage():
+    users = make_table(show_users())
+    posts = make_table(show_posts())
+    whether_root = True if "root" in who_login(request.remote_addr) else False
+    return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
+
+
 
 if __name__ == "__main__":
-	app.run(debug=True, host = "127.0.0.1", port="8080")
+    app.run(debug=True, host = "127.0.0.1", port="8080")

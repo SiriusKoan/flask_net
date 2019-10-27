@@ -52,7 +52,6 @@ def logout(remote_ip):
     return 'fail'
 
 
-
 # login
 def authorize(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
@@ -75,7 +74,6 @@ def authorize(username, passwd):
         return "There's not this user..."
     
 
-
 # register
 def register(username, passwd):
     con = sql.connect(path.join(ROOT, "database_user.db"))
@@ -93,3 +91,27 @@ def register(username, passwd):
         con.commit()
         con.close()
         return "create " + username + " successfully!"
+
+
+# admin
+def show_posts():
+    con = sql.connect(path.join(ROOT, "database_post.db"))
+    cur = con.cursor()
+    cur.execute('select * from posts')
+    data = cur.fetchall()
+    return data
+
+def show_users():
+    con = sql.connect(path.join(ROOT, "database_user.db"))
+    cur = con.cursor()
+    cur.execute('select * from users')
+    data = cur.fetchall()
+    return data
+
+def make_table(li):
+    out = ""
+    for i in range(len(li)):
+        for j in range(len(li[i])):
+            out += str(li[i][j]) + " "
+        out += "?"
+    return out
