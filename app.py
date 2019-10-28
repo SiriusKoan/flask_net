@@ -14,8 +14,9 @@ def index():
     if request.method == 'POST':
         name = request.form.get('name')
         post = request.form.get('post')
-        create_post(time.ctime(time.time()), name, post)
-
+        if name is not None :
+            if post is not None:
+                create_post(time.ctime(time.time()), name, post)
     posts = get_posts()
 
     who = who_login(request.remote_addr)
