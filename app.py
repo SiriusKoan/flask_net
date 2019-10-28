@@ -66,6 +66,20 @@ def admin_manage():
     whether_root = True if "root" in who_login(request.remote_addr) else False
     return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
 
+# API_comment 
+@app.route("/api/comment", methods = ['GET'])
+def API_comment():
+	posts = get_posts()
+	APIObject={
+		"comment":[]
+	}
+	for post in posts:
+		APIObject.comment.append({
+			"time":post[1],
+			"name":post[2],
+			"content":post[3]
+		})
+	return jsonify(APIObject)
 
 
 if __name__ == "__main__":
