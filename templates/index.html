@@ -35,7 +35,7 @@
       <hr>
   
       {% for post in posts %}
-      	{% if post[3] != "" and post[3] != "" %}
+      	{% if post[3] != "" %}
 			{% if post[2] == "root" %}
 				<div style="color: red;">{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
 			{% else %}
