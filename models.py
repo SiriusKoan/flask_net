@@ -109,12 +109,7 @@ def show_users():
     return data
 
 def make_table(li):
-    out = ""
-    for i in range(len(li)):
-        for j in range(len(li[i])):
-            out += str(li[i][j]) + " "
-        out += "?"
-    return out
+    return "?".join(" ".join(it) for it in li)
 
 def announce(content):
     pass
