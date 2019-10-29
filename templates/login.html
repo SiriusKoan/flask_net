@@ -7,12 +7,13 @@
     </head>
     <body>
         <h1 id="title">login</h1>
-        <a href="http://127.0.0.1:8080" class="backhome">Home Page</a>
+        <a href="/" class="backhome">Home Page</a>
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="passwd" placeholder="password">
             <input type="submit" value="Submit">
         </form>
-        <b>{{ username }}</b> {{ status }}
+        <b>{{ username }}</b>
+        <p id="status">{{ status }}</p>
     </body>
 </html>

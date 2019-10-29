@@ -34,7 +34,7 @@ def register_main():
         passwd = request.form.get('passwd')
         status = register(username, passwd)
         if "successfully!" in status:
-            return redirect("http://127.0.0.1:8080/login")
+            return redirect("/login")
         else:
             return render_template('register.html', status = status)
 
@@ -48,15 +48,15 @@ def login_main():
         passwd = request.form.get('passwd')
         status = authorize(username, passwd)
         if status == "login successfully!":
-            return redirect("http://127.0.0.1:8080")
+            return redirect("/")
         else:
-            return render_template('login.html', status=status)
+            return render_template('login.html', status = status)
 
 # logout
 @app.route("/logout")
 def logout_main():
     logout(request.remote_addr)
-    return redirect("http://127.0.0.1:8080")
+    return redirect("/")
 
 # admin
 @app.route("/admin")
@@ -69,4 +69,4 @@ def admin_manage():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host = "127.0.0.1", port="8080")
+    app.run(host = "127.0.0.1", port = 8080, debug = True)

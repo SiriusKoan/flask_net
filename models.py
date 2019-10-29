@@ -27,7 +27,7 @@ def who_login(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('select username from users where login_ip = "%s"' %ip)
+            cur.execute('select username from users where login_ip = "%s"' % ip)
             who = cur.fetchall()
             con.commit()
             con.close()
@@ -43,7 +43,7 @@ def logout(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('update users set login_ip = "" where login_ip = "%s"' %ip)
+            cur.execute('update users set login_ip = "" where login_ip = "%s"' % ip)
             con.commit()
             con.close()
             return 'ok'
@@ -61,10 +61,10 @@ def authorize(username, passwd):
     for user in data:
         if username in user:
             p = user[2]
-      
+
     try:
         if encrypt.sha(passwd) == p:
-            cur.execute("update users set login_ip = '%s' where username = '%s'" %(request.remote_addr, username))
+            cur.execute("update users set login_ip = '%s' where username = '%s'" % (request.remote_addr, username))
             con.commit()
             con.close()
             return "login successfully!"
@@ -72,7 +72,7 @@ def authorize(username, passwd):
             return "login failed..."
     except:
         return "There's not this user..."
-    
+
 
 # register
 def register(username, passwd):
@@ -109,12 +109,7 @@ def show_users():
     return data
 
 def make_table(li):
-    out = ""
-    for i in range(len(li)):
-        for j in range(len(li[i])):
-            out += str(li[i][j]) + " "
-        out += "?"
-    return out
+    return "?".join(" ".join(it) for it in li)
 
 def announce(content):
     pass

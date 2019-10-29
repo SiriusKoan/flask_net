@@ -4,6 +4,7 @@ button {
     height: 4vh;
     font-size: 10px;
 }
+
 input {
     width: 10vw;
     height: 3vh;
@@ -16,25 +17,18 @@ input {
 }
 
 .backhome {
-    color:blue;
+    color: blue;
     font-size: 20px;
     margin-bottom: 10px;
     text-decoration: none;
 }
+
 #status {
-
-    display:block;
-
-    position:relative ;
-
-    padding:0.75rem 1.25rem;
-
-    margin-bottom:1rem;
-
-    border-radius:0.25rem;
-
-    border:1px solid transparent ;
-
-    background-color:#28a745;
-
+    display: block;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    background-color: #28a745;
 }
