@@ -61,7 +61,7 @@ def authorize(username, passwd):
     for user in data:
         if username in user:
             p = user[2]
-      
+
     try:
         if encrypt.sha(passwd) == p:
             cur.execute("update users set login_ip = '%s' where username = '%s'" %(request.remote_addr, username))
@@ -72,7 +72,7 @@ def authorize(username, passwd):
             return "login failed..."
     except:
         return "There's not this user..."
-    
+
 
 # register
 def register(username, passwd):
