@@ -7,21 +7,21 @@ ROOT = path.dirname(path.relpath((__file__)))
 
 # main
 def create_post(time, name, content):
-    con = sql.connect(path.join(ROOT, 'database_post.db'))
+    con = sql.connect(path.join(ROOT, 'post.db'))
     cur = con.cursor()
     cur.execute('insert into posts (time, name, content) values(?, ?, ?)', (time, name, content))
     con.commit()
     con.close()
 
 def get_posts():
-    con = sql.connect(path.join(ROOT, 'database_post.db'))
+    con = sql.connect(path.join(ROOT, 'post.db'))
     cur = con.cursor()
     cur.execute('select * from posts')
     posts = cur.fetchall()
     return posts
 
 def who_login(remote_ip):
-    con = sql.connect(path.join(ROOT, "database_user.db"))
+    con = sql.connect(path.join(ROOT, "user.db"))
     cur = con.cursor()
     cur.execute('select login_ip from users')
     ips = cur.fetchall()
@@ -37,7 +37,7 @@ def who_login(remote_ip):
     return "haven't login"
 
 def logout(remote_ip):
-    con = sql.connect(path.join(ROOT, "database_user.db"))
+    con = sql.connect(path.join(ROOT, "user.db"))
     cur = con.cursor()
     cur.execute('select login_ip from users')
     ips = cur.fetchall()
@@ -54,7 +54,7 @@ def logout(remote_ip):
 
 # login
 def authorize(username, passwd):
-    con = sql.connect(path.join(ROOT, "database_user.db"))
+    con = sql.connect(path.join(ROOT, "user.db"))
     cur = con.cursor()
     cur.execute('select * from users')
     data = cur.fetchall()
@@ -76,7 +76,7 @@ def authorize(username, passwd):
 
 # register
 def register(username, passwd):
-    con = sql.connect(path.join(ROOT, "database_user.db"))
+    con = sql.connect(path.join(ROOT, "user.db"))
     cur = con.cursor()
     cur.execute('select username from users')
     data = cur.fetchall()
@@ -95,14 +95,14 @@ def register(username, passwd):
 
 # admin
 def show_posts():
-    con = sql.connect(path.join(ROOT, "database_post.db"))
+    con = sql.connect(path.join(ROOT, "post.db"))
     cur = con.cursor()
     cur.execute('select * from posts')
     data = cur.fetchall()
     return data
 
 def show_users():
-    con = sql.connect(path.join(ROOT, "database_user.db"))
+    con = sql.connect(path.join(ROOT, "user.db"))
     cur = con.cursor()
     cur.execute('select * from users')
     data = cur.fetchall()
