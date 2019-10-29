@@ -23,4 +23,8 @@ insert into users (username, passwd) values(?, ?)', ("root", "encrypt_password")
 
 ## run
 
+```sh
+$ python app.py
+```
+
 app.py is the main program, you only need to run it.
