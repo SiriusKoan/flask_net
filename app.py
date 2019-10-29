@@ -50,7 +50,7 @@ def login_main():
         if status == "login successfully!":
             return redirect("/")
         else:
-            return render_template('login.html', status=status)
+            return render_template('login.html', status = status)
 
 # logout
 @app.route("/logout")
@@ -69,4 +69,4 @@ def admin_manage():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host = "127.0.0.1", port="8080")
+    app.run(debug = True, host = "127.0.0.1", port = "8080")

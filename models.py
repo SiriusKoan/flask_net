@@ -27,7 +27,7 @@ def who_login(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('select username from users where login_ip = "%s"' %ip)
+            cur.execute('select username from users where login_ip = "%s"' % ip)
             who = cur.fetchall()
             con.commit()
             con.close()
@@ -43,7 +43,7 @@ def logout(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('update users set login_ip = "" where login_ip = "%s"' %ip)
+            cur.execute('update users set login_ip = "" where login_ip = "%s"' % ip)
             con.commit()
             con.close()
             return 'ok'
@@ -64,7 +64,7 @@ def authorize(username, passwd):
 
     try:
         if encrypt.sha(passwd) == p:
-            cur.execute("update users set login_ip = '%s' where username = '%s'" %(request.remote_addr, username))
+            cur.execute("update users set login_ip = '%s' where username = '%s'" % (request.remote_addr, username))
             con.commit()
             con.close()
             return "login successfully!"
