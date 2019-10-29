@@ -9,9 +9,10 @@ ROOT = path.dirname(path.relpath((__file__)))
 def create_post(time, name, content):
     con = sql.connect(path.join(ROOT, 'post.db'))
     cur = con.cursor()
-    cur.execute('insert into posts (time, name, content) values(?, ?, ?)', (time, name, content))
-    con.commit()
-    con.close()
+    if name != "" and content != "":
+        cur.execute('insert into posts (time, name, content) values(?, ?, ?)', (time, name, content))
+        con.commit()
+        con.close()
 
 def get_posts():
     con = sql.connect(path.join(ROOT, 'post.db'))
