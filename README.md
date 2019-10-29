@@ -24,6 +24,7 @@ insert into users (username, passwd) values(?, ?)', ("root", "encrypt_password")
 ## run
 
 ```sh
+$ pip install -r requirements.txt
 $ python app.py
 ```
 
