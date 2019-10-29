@@ -9,9 +9,6 @@ Then you should run the following two command to create database of users and po
 
 ```sh
 $ sqlite3 database_user.db < schema_user.sql
-```
-
-```sh
 $ sqlite3 database_post.db < schema_post.sql
 ```
 
