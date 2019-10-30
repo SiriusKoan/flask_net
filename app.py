@@ -59,18 +59,23 @@ def logout_main():
     return redirect("/")
 
 # admin
-@app.route("/admin")
+@app.route("/admin", methods = ['GET', 'POST'])
 def admin_manage():
-    #users = show_users()
-    #posts = show_posts()
-    users = make_table(show_users())
-    posts = make_table(show_posts())
-    whether_root = True if "root" in who_login(request.remote_addr) else False
-    return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
+    if request.method == 'GET':
+        users = make_table(show_users())
+        posts = make_table(show_posts())
+        whether_root = True if "root" in who_login(request.remote_addr) else False
+        return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
+    if request.method == 'POST':
+        db = request.form.get('primary')[0]
+        primary = request.form.get('primary')[1]
+        delete(db, primary)
+        return redirect("/admin")
 
 @app.route("/admin/delete")
 def delete_post_or_user():
-    delete()
+    primary_key = request.form.get('primary')
+    delete(primary_key)
     
 
 

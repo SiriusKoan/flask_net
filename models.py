@@ -117,5 +117,14 @@ def make_table(li):
 def announce(content):
     pass
 
-def delete():
-    pass
+def delete(db, primary):
+    if db == "u":
+        con = sql.connect(path.join(ROOT, "user.db"))
+        cur = con.cursor()
+        cur.execute('delete from users where id = %s;' %primary)
+    if db == "p":
+        con = sql.connect(path.join(ROOT, "post.db"))
+        cur = con.cursor()
+        cur.execute('delete from posts where id = %s;' %primary)
+    con.commit()
+    con.close()

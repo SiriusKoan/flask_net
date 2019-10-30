@@ -14,10 +14,11 @@
         {% if whether_root == True %}
             <h1 style="font-size: 50px;">Management</h1>
             <h1>Users</h1>
+            {{ users }}
             <script>
                 var s = "{{ users }}".split("?");
-                for (var i = 0; i < s.length - 1; i++) {
-                    document.write("<div><form action='/admin/delete' method='post'><input type='submit' value='delete'></form>" + s[i] + "</div>" + "<br>");
+                for (var i = 0; i < s.length; i++) {
+                    document.write("<form action='/admin' method='post'><input type='submit' value='delete'>" + "<input type='hidden' name='primary' value=u" + (i + 1) + ">" + s[i] + "</form>" + "<br>");
                 }
             </script>
             <hr>
@@ -27,7 +28,7 @@
             <script>
                 var s = "{{ posts }}".split("?");
                 for (var i = 0; i < s.length; i++) {
-                    document.write("<form action='/admin/delete' method='post'><input type='submit' value='delete'>" + "<input type='hidden' name=" + (i + 1) + ">" + s[i] + "</form>" + "<br>");
+                    document.write("<form action='/admin' method='post'><input type='submit' value='delete'>" + "<input type='hidden' name='primary' value=p" + (i + 1) + ">" + s[i] + "</form>" + "<br>");
                 }
             </script>
         {% else %}
