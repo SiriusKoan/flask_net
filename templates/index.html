@@ -13,16 +13,16 @@
   <body>
     <div id="title">title</div>
     <div style="width:45vw; left:3vw; position:absolute;" id="operation and announce">
-      {% if who == "haven't login" %}
-        <button class="btn btn-success" onclick="window.location.href = '/login'">login</button>
-        &nbsp;
-		<button class="btn btn-primary" onclick="window.open('/register')" >register</button>
+
+    {% if who == "haven't login" %}
+      <button class="btn btn-success" onclick="window.location.href = '/login'">login</button>
+      &nbsp;
+		  <button class="btn btn-primary" onclick="window.open('/register')" >register</button>
 	  {% else %}
-        <button class="btn btn-warning" onclick="window.location.href = '/logout'" >logout</button>
-      {% endif %}
-        <div class="alert alert-info" >
-			Now login : {{ who }}
-		</div>
+      <button class="btn btn-warning" onclick="window.location.href = '/logout'" >logout</button>
+    {% endif %}
+    
+    <div class="alert alert-info" >Now login : {{ who }}</div>
 	  
       <hr>
       <h2>Announce</h2>
@@ -30,7 +30,6 @@
 
     <div style="width:45vw; right:3vw; position:absolute;" id="posts">
 	  {% if who != "haven't login" %}
-		<!-- 若有登入則顯示表單 -->
 		<form action="/" method="post">
 			<input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
 			<input placeholder="Post Content" name="post">
@@ -38,19 +37,18 @@
 		</form>
 		<hr>
 	  {% else %}
-	    <!-- 若未登入則顯示You haven't login!!! -->
 		<div class="alert alert-danger">You haven't login!!!</div>
 	  {% endif %}
 	  
-      {% for post in posts %}
-      	{% if post[3] != "" %}
-			{% if post[2] == "root" %}
-				<div style="color: red;">{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
-			{% else %}
-       			<div>{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
-			{% endif %}
-      	{% endif %}
-      {% endfor %}
+    {% for post in posts %}
+      {% if post[3] != "" %}
+		    {% if post[2] == "root" %}
+			    <div style="color: red;">{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
+		    {% else %}
+       		<div>{{ post[1][4:19] }} {{ post[2] + " : " + post[3] }}</div>
+		    {% endif %}
+      {% endif %}
+    {% endfor %}
     </div>
   </body>
 </html>

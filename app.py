@@ -67,6 +67,9 @@ def admin_manage():
     return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
 
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
 
 if __name__ == "__main__":
     app.run(host = "127.0.0.1", port = 8080, debug = True)
