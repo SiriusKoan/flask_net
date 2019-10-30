@@ -13,31 +13,35 @@
   <body>
     <div id="title">title</div>
     <div style="width:45vw; left:3vw; position:absolute;" id="operation and announce">
-      <a href="/register" target="_blank"><button>register</button></a>
       {% if who == "haven't login" %}
-      <a href="/login"><button>login</button></a>
-      {% else %}
-      <a href="/logout"><button style="background-color: rgb(238, 62, 49);">logout</button></a>
+        <button class="btn btn-success" onclick="window.location.href = '/login'">login</button>
+        &nbsp;
+		<button class="btn btn-primary" onclick="window.open('/register')" >register</button>
+	  {% else %}
+        <button class="btn btn-warning" onclick="window.location.href = '/logout'" >logout</button>
       {% endif %}
-      now login : {{ who }}
+        <div class="alert alert-info" >
+			Now login : {{ who }}
+		</div>
+	  
       <hr>
       <h2>Announce</h2>
     </div>
 
     <div style="width:45vw; right:3vw; position:absolute;" id="posts">
-      <form action="/" method="post">
-        <input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
-        <input placeholder="Post Content" name="post">
-        {% if who != "haven't login" %}
-        <input type="submit" value="Submit">
-        {% else %}
-        <script>
-          alert("You haven\'t login!!!");
-        </script>
-        {% endif %}
-      </form>
-      <hr>
-  
+	  {% if who != "haven't login" %}
+		<!-- 若有登入則顯示表單 -->
+		<form action="/" method="post">
+			<input placeholder="Name" name="name" value="{{ who }}" readonly="readonly">
+			<input placeholder="Post Content" name="post">
+			<input type="submit" value="Submit">
+		</form>
+		<hr>
+	  {% else %}
+	    <!-- 若未登入則顯示You haven't login!!! -->
+		<div class="alert alert-danger">You haven't login!!!</div>
+	  {% endif %}
+	  
       {% for post in posts %}
       	{% if post[3] != "" %}
 			{% if post[2] == "root" %}
