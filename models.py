@@ -100,6 +100,7 @@ def show_posts():
     cur = con.cursor()
     cur.execute('select * from posts')
     data = cur.fetchall()
+    con.close()
     return data
 
 def show_users():
@@ -107,10 +108,14 @@ def show_users():
     cur = con.cursor()
     cur.execute('select * from users')
     data = cur.fetchall()
+    con.close()
     return data
 
 def make_table(li):
-    return "?".join(" ".join(it) for it in li)
+    return "?".join("".join(str(it)) for it in li)
 
 def announce(content):
+    pass
+
+def delete():
     pass

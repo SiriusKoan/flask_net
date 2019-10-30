@@ -61,10 +61,17 @@ def logout_main():
 # admin
 @app.route("/admin")
 def admin_manage():
+    #users = show_users()
+    #posts = show_posts()
     users = make_table(show_users())
     posts = make_table(show_posts())
     whether_root = True if "root" in who_login(request.remote_addr) else False
     return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
+
+@app.route("/admin/delete")
+def delete_post_or_user():
+    delete()
+    
 
 
 @app.errorhandler(404)

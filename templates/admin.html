@@ -17,15 +17,17 @@
             <script>
                 var s = "{{ users }}".split("?");
                 for (var i = 0; i < s.length - 1; i++) {
-                    document.write(s[i] + "<br>");
+                    document.write("<div><form action='/admin/delete' method='post'><input type='submit' value='delete'></form>" + s[i] + "</div>" + "<br>");
                 }
             </script>
             <hr>
+
             <h1>Posts</h1>
+            {{ posts }}
             <script>
                 var s = "{{ posts }}".split("?");
                 for (var i = 0; i < s.length; i++) {
-                    document.write(s[i] + "<br>");
+                    document.write("<form action='/admin/delete' method='post'><input type='submit' value='delete'>" + "<input type='hidden' name=" + (i + 1) + ">" + s[i] + "</form>" + "<br>");
                 }
             </script>
         {% else %}
