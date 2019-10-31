@@ -28,7 +28,7 @@ def who_login(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('SELECT USERNAME FROM users WHERE login_ip = "?"', (ip))
+            cur.execute('SELECT username FROM users WHERE login_ip = "?"', (ip))
             who = cur.fetchall()
             con.commit()
             con.close()
