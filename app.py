@@ -19,7 +19,7 @@ def index():
     posts = get_posts()
 
     who = who_login(request.remote_addr)
-    if who != "haven't login":
+    if who != '':
         return render_template('index.html', posts = posts, who = who[0])
     else:
         return render_template('index.html', posts = posts, who = who)
@@ -28,51 +28,51 @@ def index():
 @app.route('/register', methods = ['GET', 'POST'])
 def register_main():
     if request.method == 'GET':
-        return render_template("register.html", status = "")
+        return render_template('register.html', status = '')
     if request.method == 'POST':
         username = request.form.get('username')
         passwd = request.form.get('passwd')
-        status = register(username, passwd)
-        if "successfully!" in status:
-            return redirect("/login")
+        success = register(username, passwd)
+        if success:
+            return redirect('/login')
         else:
-            return render_template('register.html', status = status)
+            return render_template('register.html', status = 'Username exists!')
 
 # login
 @app.route('/login', methods = ['GET', 'POST'])
 def login_main():
     if request.method == 'GET':
-        return render_template("login.html")
+        return render_template('login.html')
     if request.method == 'POST':
         username = request.form.get('username')
         passwd = request.form.get('passwd')
-        status = authorize(username, passwd)
-        if status == "login successfully!":
-            return redirect("/")
+        status, err_msg = authorize(username, passwd)
+        if status:
+            return redirect('/')
         else:
-            return render_template('login.html', status = status)
+            return render_template('login.html', status = err_msg)
 
 # logout
-@app.route("/logout")
+@app.route('/logout')
 def logout_main():
     logout(request.remote_addr)
-    return redirect("/")
+    return redirect('/')
 
 # admin
-@app.route("/admin", methods = ['GET', 'POST'])
+@app.route('/admin', methods = ['GET', 'POST'])
 def admin_manage():
     if request.method == 'GET':
         users = make_table(show_users())
         posts = make_table(show_posts())
-        whether_root = True if "root" in who_login(request.remote_addr) else False
+        whether_root = 'root' in who_login(request.remote_addr)
         return render_template('admin.html', users = users, posts = posts, whether_root = whether_root)
     if request.method == 'POST':
         db = request.form.get('primary')[0]
         primary = request.form.get('primary')[1]
         delete(db, primary)
-        return redirect("/admin")
+        return redirect('/admin')
 
-@app.route("/admin/delete")
+@app.route('/admin/delete')
 def delete_post_or_user():
     primary_key = request.form.get('primary')
     delete(primary_key)
@@ -81,7 +81,7 @@ def delete_post_or_user():
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html")
+    return render_template('404.html')
 
-if __name__ == "__main__":
-    app.run(host = "127.0.0.1", port = 8080, debug = True)
+if __name__ == '__main__':
+    app.run(host = '127.0.0.1', port = 8080, debug = True)

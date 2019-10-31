@@ -1,7 +1,7 @@
-drop table if exists users;
-    create table users (
-        id integer primary key autoincrement,
-        username text not null,
-        passwd text not null,
-        login_ip binary
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT    NOT NULL,
+    passwd   TEXT    NOT NULL,
+    login_ip BINARY
 );
