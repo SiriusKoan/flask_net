@@ -9,16 +9,16 @@ CORS(app)
 # main
 @app.route('/', methods = ['GET', 'POST'])
 def index():
+    who = who_login(request.remote_addr)
     if request.method == 'GET':
         pass
     if request.method == 'POST':
         name = request.form.get('name')
         post = request.form.get('post')
-        create_post(time.ctime(time.time()), name, post)
+        create_post(time.ctime(time.time()), name, post, who)
 
     posts = get_posts()
 
-    who = who_login(request.remote_addr)
     if who != '':
         return render_template('index.html', posts = posts, who = who[0])
     else:

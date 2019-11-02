@@ -1,18 +1,19 @@
 import sqlite3 as sql
 from os import path
 import encrypt
-from flask import request
+from flask import request, render_template
 
 ROOT = path.dirname(path.relpath((__file__)))
 
 # main
-def create_post(time, name, content):
+def create_post(time, name, content, who):
     con = sql.connect(path.join(ROOT, 'post.db'))
     cur = con.cursor()
-    if name != '' and content != '':
-        cur.execute('INSERT INTO posts (time, name, content) VALUES (?, ?, ?)', (time, name, content))
-        con.commit()
-        con.close()
+    if content != '':
+        if name == who[0]:
+            cur.execute('INSERT INTO posts (time, name, content) VALUES (?, ?, ?)', (time, name, content))
+            con.commit()
+            con.close()
 
 def get_posts():
     con = sql.connect(path.join(ROOT, 'post.db'))
@@ -28,7 +29,7 @@ def who_login(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('SELECT username FROM users WHERE login_ip = "?"', (ip))
+            cur.execute('SELECT username FROM users WHERE login_ip = ?', (ip))
             who = cur.fetchall()
             con.commit()
             con.close()
@@ -44,7 +45,7 @@ def logout(remote_ip):
     ips = cur.fetchall()
     for ip in ips:
         if ip[0] == remote_ip:
-            cur.execute('UPDATE users SET login_ip = "" WHERE login_ip = "?"', (ip))
+            cur.execute('UPDATE users SET login_ip = "" WHERE login_ip = ?', (ip))
             con.commit()
             con.close()
             return True
@@ -65,7 +66,7 @@ def authorize(username, passwd):
 
     try:
         if encrypt.sha(passwd) == p:
-            cur.execute('UPDATE users SET login_ip = "?" WHERE username = "?"', (request.remote_addr, username))
+            cur.execute('UPDATE users SET login_ip = "?" WHERE username = ?', (request.remote_addr, username))
             con.commit()
             con.close()
             return (True, 'login successfully!')
