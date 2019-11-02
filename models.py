@@ -66,7 +66,7 @@ def authorize(username, passwd):
 
     try:
         if encrypt.sha(passwd) == p:
-            cur.execute('UPDATE users SET login_ip = "?" WHERE username = ?', (request.remote_addr, username))
+            cur.execute('UPDATE users SET login_ip = ? WHERE username = ?', (request.remote_addr, username))
             con.commit()
             con.close()
             return (True, 'login successfully!')
