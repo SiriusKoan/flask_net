@@ -1,7 +1,5 @@
 # flask_net
 
-Made by Sirius
-
 ## Setup
 
 1. Modify the IP address and port in `app.py` at line 63.
