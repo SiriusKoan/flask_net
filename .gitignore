@@ -1,4 +1,4 @@
-database_post.db
-database_user.db
+post.db
+user.db
 __pycache__/*
 myenv/*
