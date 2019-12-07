@@ -1,4 +1,5 @@
 # flask_net
+<img alt="GitHub" src="https://img.shields.io/github/license/SiriusKoan/flask_net">
 
 ## Setup
 
