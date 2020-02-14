@@ -23,5 +23,5 @@ INSERT INTO users (username, passwd) VALUES (?, ?), ("root", "password_hash")
 
 ```sh
 $ pip install -r requirements.txt
-$ flask run --cert=key/cert.pem --key=key/privkey.pem-port 443 --host 140.131.149.50
+$ flask run --cert=key/cert.pem --key=key/privkey.pem --port 443 --host 140.131.149.50
 ```

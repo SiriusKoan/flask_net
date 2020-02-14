@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from flask_cors import CORS
+from flaskext.markdown import Markdown
 from models import *
 import time
 
 app = Flask(__name__)
 CORS(app)
+Markdown(app)
 
 # main
 @app.route('/', methods = ['GET', 'POST'])

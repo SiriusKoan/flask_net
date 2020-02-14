@@ -11,6 +11,10 @@ input {
     top: 3vh;
 }
 
+p {
+    margin: 0px;
+}
+
 #title {
     font-size: 70px;
     text-align: center;
